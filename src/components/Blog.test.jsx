@@ -32,7 +32,7 @@ describe('A blog', () => {
         expect(urlElement).not.toBeInTheDocument()
     })
 
-    test('renders url and description when button clicked', async () => {
+    test('renders url and description when the show more button clicked', async () => {
         const blog = {
             title: 'Component testing is done with react-testing-library',
             author: 'testing author',
@@ -63,6 +63,43 @@ describe('A blog', () => {
 
         const likesElement = screen.getByText('0')
         expect(likesElement).toBeDefined()
+    })
+
+    test('clicking the show more button twice renders the default', async () => {
+        const blog = {
+            title: 'Component testing is done with react-testing-library',
+            author: 'testing author',
+            description: 'testing description of blog post testing is done with react-testing-library',
+            url: 'http://testing.com',
+            likes: 0
+        }
+
+        const user = userEvent.setup()
+        render(<Blog blog={blog} />)
+
+        const button = screen.getByText('show more')
+
+        await user.click(button)
+        expect(button).toHaveTextContent('show less')
+
+        await user.click(button)
+        expect(button).toHaveTextContent('show more')
+
+        const titleElement = screen.getByText('Component testing is done with react-testing-library')
+        expect(titleElement).toBeDefined()
+
+        const authorElement = screen.getByText('testing author')
+        expect(authorElement).toBeDefined()
+
+        const likesElement = screen.getByText('0')
+        expect(likesElement).toBeDefined()
+
+        const descriptionElement = screen.queryByText('testing description of blog post testing is done with react-testing-library')
+        expect(descriptionElement).not.toBeInTheDocument()
+
+        const urlElement = screen.queryByText('http://testing.com') // returns null if not found
+        expect(urlElement).not.toBeInTheDocument()
+
     })
 
 })
