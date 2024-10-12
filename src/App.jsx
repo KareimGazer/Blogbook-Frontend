@@ -7,6 +7,7 @@ import Navbar from './components/Navbar'
 import Blog from './components/Blog'
 import LoginForm from './components/forms/LoginForm'
 import BlogCreator from './components/BlogCreator'
+import Footer from './components/Footer'
 
 /**
  * like button
@@ -69,15 +70,12 @@ function App() {
             return (
               <Blog
                 key={blog.id}
-                title={blog.title}
-                author={blog.author}
-                description={blog.description}
-                url={blog.url}
-                likes={blog.likes}
+                blog={blog}
               />
             )
           })}
       </div>
+      <Footer />
     </>
   )
 }

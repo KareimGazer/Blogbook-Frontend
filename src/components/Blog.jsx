@@ -1,6 +1,7 @@
 import { useState } from "react"
-const Blog = ({ title, author, url, likes, description }) => {
+const Blog = ({ blog }) => {
     const [detailed, setDetailed] = useState(false)
+    const { title, author, url, description, likes } = blog
     return (
         <div className="blog">
             <ul>

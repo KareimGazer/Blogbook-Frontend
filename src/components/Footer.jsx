@@ -2,7 +2,7 @@
 const Footer = () => {
     return (
         <div className="footer">
-            <p>© 2022 Blogbook. All rights reserved</p>
+            <p>© 2024 Blogbook. All rights reserved</p>
         </div>
     )
 }

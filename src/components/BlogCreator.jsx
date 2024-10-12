@@ -5,16 +5,18 @@ const BlogCreator = ({setNotification, setBlogs, setAddingBlog}) => {
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [url, setUrl] = useState('')
+    const [description, setDescription] = useState('')
 
     const addBlog = async (event) => {
         event.preventDefault()
-        const blog = { title, author, url }
+        const blog = { title, author, url, description }
         try {
             await createBlog(blog)
             setBlogs(await getAllBlogs())
             setTitle('')
             setAuthor('')
             setUrl('')
+            setDescription('')
             setNotification('Blog created successfully')
             setAddingBlog(false)
         }
@@ -37,6 +39,10 @@ const BlogCreator = ({setNotification, setBlogs, setAddingBlog}) => {
             <div>
                 <label htmlFor="url">Url</label>
                 <input type="text" name="url" id="url" onChange={({ target }) => setUrl(target.value)}/>
+            </div>
+            <div>
+                <label htmlFor="description">Description</label>
+                <input type="text" name="description" id="description" onChange={({ target }) => setDescription(target.value)}/>
             </div>
             <button id="create-button" type="submit" disabled={!title || !author || !url}>Create</button>
         </form>  

@@ -12,4 +12,14 @@
 - topics interested in for feed
 - follow other topics
 - reading history (good for recommendations)
-- 
+
+``` md
+|- /main
+|  |- index.js
+|  |- index.unit.test.js
+|- /supporting
+|  |- fetch.js
+|- /tests
+|  |- /int
+|  |  |- api.int.test.js
+```
