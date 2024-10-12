@@ -44,7 +44,7 @@ const BlogCreator = ({setNotification, setBlogs, setAddingBlog}) => {
                 <label htmlFor="description">Description</label>
                 <input type="text" name="description" id="description" onChange={({ target }) => setDescription(target.value)}/>
             </div>
-            <button id="create-button" type="submit" disabled={!title || !author || !url}>Create</button>
+            <button id="create-button" type="submit" disabled={!title || !author || !url || !description}>Create</button>
         </form>  
     )
 }
