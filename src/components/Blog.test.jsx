@@ -16,6 +16,7 @@ describe('A blog', () => {
 
         render(<Blog blog={blog} />)
 
+        
         const titleElement = screen.getByText('Component testing is done with react-testing-library')
         expect(titleElement).toBeDefined()
 
@@ -25,9 +26,12 @@ describe('A blog', () => {
         const likesElement = screen.getByText('0')
         expect(likesElement).toBeDefined()
 
-        const descriptionElement = screen.queryByText('testing description of blog post testing is done with react-testing-library')
+        
+        // { exact: false } for getting contained text
+        const descriptionElement = screen.queryByText('testing description of', { exact: false })
         expect(descriptionElement).not.toBeInTheDocument()
 
+        // queryByText does not cause an exception if it is not found
         const urlElement = screen.queryByText('http://testing.com') // returns null if not found
         expect(urlElement).not.toBeInTheDocument()
     })
