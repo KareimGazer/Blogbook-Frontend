@@ -23,3 +23,7 @@
 |  |- /int
 |  |  |- api.int.test.js
 ```
+
+## Testing
+- mocking getting blogs data in the app or the dedicated component to be written
+- integration tests like seeing the notification when a new blog is created 

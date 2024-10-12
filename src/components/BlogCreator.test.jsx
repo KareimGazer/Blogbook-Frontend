@@ -5,9 +5,13 @@ import userEvent from '@testing-library/user-event'
 
 describe('A blog creator', () => {
     test('create button is disabled by default when any field is empty', () => {
-        const user = userEvent.setup()
         render(<BlogCreator />)
         const button = screen.getByText('Create')
         expect(button).toBeDisabled()
+    })
+
+    test('create button is enabled when all fields are filled', () => {
+        const user = userEvent.setup()
+        render(<BlogCreator />)
     })
 })
