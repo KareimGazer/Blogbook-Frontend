@@ -15,7 +15,6 @@ describe('A blog', () => {
         }
 
         render(<Blog blog={blog} />)
-
         
         const titleElement = screen.getByText('Component testing is done with react-testing-library')
         expect(titleElement).toBeDefined()

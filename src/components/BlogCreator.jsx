@@ -21,6 +21,7 @@ const BlogCreator = ({setNotification, setBlogs, setAddingBlog}) => {
             setAddingBlog(false)
         }
         catch (exception) {
+            console.log(exception)
             setNotification('Failed to create blog')
         }
         
@@ -30,19 +31,19 @@ const BlogCreator = ({setNotification, setBlogs, setAddingBlog}) => {
             <h2>Create new blog</h2>
             <div>
                 <label htmlFor="title">Title</label>
-                <input type="text" name="title" id="title" onChange={({ target }) => setTitle(target.value)}/>
+                <input type="text" name="title" id="title" onChange={({ target }) => setTitle(target.value)} data-testid="title-input"/>
             </div>
             <div>
                 <label htmlFor="author">Author</label>
-                <input type="text" name="author" id="author" onChange={({ target }) => setAuthor(target.value)}/>
+                <input type="text" name="author" id="author" onChange={({ target }) => setAuthor(target.value)} data-testid="author-input"/>
             </div>
             <div>
                 <label htmlFor="url">Url</label>
-                <input type="text" name="url" id="url" onChange={({ target }) => setUrl(target.value)}/>
+                <input type="text" name="url" id="url" onChange={({ target }) => setUrl(target.value)} data-testid="url-input"/>
             </div>
             <div>
                 <label htmlFor="description">Description</label>
-                <input type="text" name="description" id="description" onChange={({ target }) => setDescription(target.value)}/>
+                <input type="text" name="description" id="description" onChange={({ target }) => setDescription(target.value)} data-testid="description-input"/>
             </div>
             <button id="create-button" type="submit" disabled={!title || !author || !url || !description}>Create</button>
         </form>  
