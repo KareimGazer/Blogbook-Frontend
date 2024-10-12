@@ -9,27 +9,8 @@ import BlogCreator from './components/BlogCreator'
 
 function App() {
   const [blogs, setBlogs] = useState([])
-
   const [user, setUser] = useState(null)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
   const [noftificationMessage, setNoftificationMessage] = useState(null)
-
-  const handleLogin = async (event) => {
-    event.preventDefault()
-    try {
-      const user = await login({ username, password })
-      setUser(user)
-      setToken(user.token)
-      window.localStorage.setItem('user', JSON.stringify(user))
-      setUsername('')
-      setPassword('')
-    }
-    catch (exception) {
-      showNotification('Wrong credentials')
-    }
-  }
 
   const showNotification = (message) => {
     setNoftificationMessage(message)
@@ -71,7 +52,7 @@ function App() {
       <h1>Blogbook</h1>
       {user && <h3>Hello, {user.name} !</h3>}
       {user && <button onClick={handleLogout}>Logout</button>}
-      {!user && <LoginForm login={handleLogin} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}
+      {!user && <LoginForm setUser={setUser} showNotification={showNotification} />}
       {user && <BlogCreator setNotification={showNotification} setBlogs={setBlogs}/>}
       <div className="blogs">
         {blogs
