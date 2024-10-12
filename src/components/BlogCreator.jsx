@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { getAllBlogs, createBlog } from "../services/blogs"
 
-const BlogCreator = ({setNotification, setBlogs}) => {
+const BlogCreator = ({setNotification, setBlogs, setAddingBlog}) => {
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [url, setUrl] = useState('')
@@ -16,6 +16,7 @@ const BlogCreator = ({setNotification, setBlogs}) => {
             setAuthor('')
             setUrl('')
             setNotification('Blog created successfully')
+            setAddingBlog(false)
         }
         catch (exception) {
             setNotification('Failed to create blog')
@@ -37,7 +38,7 @@ const BlogCreator = ({setNotification, setBlogs}) => {
                 <label htmlFor="url">Url</label>
                 <input type="text" name="url" id="url" onChange={({ target }) => setUrl(target.value)}/>
             </div>
-            <button id="create-button" type="submit">Create</button>
+            <button id="create-button" type="submit" disabled={!title || !author || !url}>Create</button>
         </form>  
     )
 }

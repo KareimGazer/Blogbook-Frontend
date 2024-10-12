@@ -1,27 +1,30 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { getAllBlogs, setToken } from './services/blogs'
-import { login } from './services/login'
 
 import Notification from './components/Notification'
+import Navbar from './components/Navbar'
 import Blog from './components/Blog'
 import LoginForm from './components/forms/LoginForm'
 import BlogCreator from './components/BlogCreator'
+
+/**
+ * like button
+ * delete blog post + window confirmation
+ * @returns 
+ */
 
 function App() {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
   const [noftificationMessage, setNoftificationMessage] = useState(null)
+  const [addingBlog, setAddingBlog] = useState(false)
 
   const showNotification = (message) => {
     setNoftificationMessage(message)
     setTimeout(() => {
       setNoftificationMessage(null)
     }, 5000);
-  }
-
-  const handleLogout = () => {
-    window.localStorage.removeItem('user')
-    setUser(null)
   }
 
   useEffect(() => {
@@ -49,20 +52,26 @@ function App() {
   return (
     <>
       <Notification message={noftificationMessage} />
-      <h1>Blogbook</h1>
-      {user && <h3>Hello, {user.name} !</h3>}
-      {user && <button onClick={handleLogout}>Logout</button>}
-      {!user && <LoginForm setUser={setUser} showNotification={showNotification} />}
-      {user && <BlogCreator setNotification={showNotification} setBlogs={setBlogs}/>}
+      
+      <Router>
+        <Navbar user={user} setUser={setUser} setAddingBlog={setAddingBlog}/>
+        <h1>Blogbook</h1>
+        <Routes>
+          <Route path="/login" element={<LoginForm setUser={setUser} showNotification={showNotification} />} />
+        </Routes>
+      </Router>
+      {user && addingBlog && <BlogCreator setNotification={showNotification} setBlogs={setBlogs} setAddingBlog={setAddingBlog} />}
       <div className="blogs">
         {blogs
           .filter((blog) => user)
+          .sort((a, b) => b.likes - a.likes)
           .map((blog) => {
             return (
               <Blog
                 key={blog.id}
                 title={blog.title}
                 author={blog.author}
+                description={blog.description}
                 url={blog.url}
                 likes={blog.likes}
               />
